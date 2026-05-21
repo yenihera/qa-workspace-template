@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QA Execution Report - Registration Module</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #333; line-height: 1.6; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+    
+    /* Header */
+    .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 32px; border-radius: 12px; margin-bottom: 24px; }
+    .header h1 { font-size: 24px; margin-bottom: 8px; }
+    .header .meta { font-size: 13px; opacity: 0.8; }
+    .header .meta span { margin-right: 16px; }
+
+    /* Summary Cards */
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .summary-card { background: white; border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .summary-card .number { font-size: 32px; font-weight: 700; }
+    .summary-card .label { font-size: 12px; text-transform: uppercase; color: #666; margin-top: 4px; }
+    .summary-card.total .number { color: #333; }
+    .summary-card.passed .number { color: #22c55e; }
+    .summary-card.failed .number { color: #ef4444; }
+    .summary-card.flaky .number { color: #f59e0b; }
+    .summary-card.blocked .number { color: #6b7280; }
+
+    /* Progress Bar */
+    .progress-bar { background: white; border-radius: 10px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .progress-bar h3 { margin-bottom: 12px; font-size: 14px; color: #666; }
+    .bar { height: 24px; border-radius: 12px; overflow: hidden; display: flex; background: #e5e7eb; }
+    .bar .segment { height: 100%; transition: width 0.3s; }
+    .bar .passed-seg { background: #22c55e; }
+    .bar .failed-seg { background: #ef4444; }
+    .bar .flaky-seg { background: #f59e0b; }
+
+    /* Test Results Table */
+    .results-section { background: white; border-radius: 10px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 24px; }
+    .results-section h2 { font-size: 18px; margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { background: #f8fafc; padding: 12px; text-align: left; font-weight: 600; border-bottom: 2px solid #e2e8f0; }
+    td { padding: 12px; border-bottom: 1px solid #f1f5f9; vertical-align: top; }
+    tr:hover { background: #f8fafc; }
+
+    /* Status Badges */
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
+    .badge-passed { background: #dcfce7; color: #166534; }
+    .badge-failed { background: #fee2e2; color: #991b1b; }
+    .badge-flaky { background: #fef3c7; color: #92400e; }
+    .badge-blocked { background: #f3f4f6; color: #374151; }
+
+    /* Failure Details */
+    .failure-card { background: #fff5f5; border: 1px solid #fecaca; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+    .failure-card h3 { color: #991b1b; font-size: 14px; margin-bottom: 12px; }
+    .failure-card .error-msg { background: #1a1a2e; color: #f87171; padding: 12px; border-radius: 6px; font-family: monospace; font-size: 12px; margin: 8px 0; overflow-x: auto; }
+    .failure-card .meta-row { display: flex; gap: 16px; margin-top: 8px; font-size: 12px; color: #666; }
+    .failure-card .meta-row span { background: #f3f4f6; padding: 2px 8px; border-radius: 4px; }
+
+    /* Steps */
+    .steps-list { margin-top: 12px; }
+    .step-item { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 12px; }
+    .step-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .step-dot.pass { background: #22c55e; }
+    .step-dot.fail { background: #ef4444; }
+    .step-dot.skip { background: #d1d5db; }
+
+    /* Flaky Warning */
+    .flaky-card { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+    .flaky-card h3 { color: #92400e; font-size: 14px; margin-bottom: 8px; }
+
+    /* Footer */
+    .footer { text-align: center; padding: 24px; color: #9ca3af; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>QA Execution Report</h1>
+      <p style="font-size: 16px; margin-bottom: 12px;">Registration Module</p>
+      <div class="meta">
+        <span>📅 2026-05-19</span>
+        <span>⏱️ 154.5s</span>
+        <span>🌐 Chromium</span>
+        <span>🏠 Local Environment</span>
+        <span>🆔 EXEC-REG-20260519-001</span>
+      </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="summary-grid">
+      <div class="summary-card total">
+        <div class="number">12</div>
+        <div class="label">Total Tests</div>
+      </div>
+      <div class="summary-card passed">
+        <div class="number">9</div>
+        <div class="label">Passed</div>
+      </div>
+      <div class="summary-card failed">
+        <div class="number">2</div>
+        <div class="label">Failed</div>
+      </div>
+      <div class="summary-card flaky">
+        <div class="number">1</div>
+        <div class="label">Flaky</div>
+      </div>
+      <div class="summary-card blocked">
+        <div class="number">0</div>
+        <div class="label">Blocked</div>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+      <h3>Pass Rate: 75% (9/12)</h3>
+      <div class="bar">
+        <div class="segment passed-seg" style="width: 75%"></div>
+        <div class="segment failed-seg" style="width: 16.7%"></div>
+        <div class="segment flaky-seg" style="width: 8.3%"></div>
+      </div>
+    </div>
+
+    <!-- All Results -->
+    <div class="results-section">
+      <h2>Test Results</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>TC ID</th>
+            <th>Test Name</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Duration</th>
+            <th>Failure Category</th>
+            <th>Retry</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>TC-REG-001</strong></td>
+            <td>Register valid user</td>
+            <td>API</td>
+            <td><span class="badge badge-passed">Passed</span></td>
+            <td>3.2s</td>
+            <td>-</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td><strong>TC-REG-002</strong></td>
+            <td>Register tanpa email</td>
+            <td>API</td>
+            <td><span class="badge badge-passed">Passed</span></td>
+            <td>1.8s</td>
+            <td>-</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td><strong>TC-REG-003</strong></td>
+            <td>Register password kurang dari 8 karakter</td>
+            <td>API</td>
+            <td><span class="badge badge-passed">Passed</span></td>
+            <td>1.8s</td>
+            <td>-</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td><strong>TC-REG-004</strong></td>
+            <td>Register email duplikat</td>
+            <td>API</td>
+            <td><span class="badge badge-passed">Passed</span></td>
+            <td>3.4s</td>
+            <td>-</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td><strong>TC-REG-005</strong></td>
+            <td>Form validation empty submit</td>
+            <td>UI</td>
+            <td><span class="badge badge-failed">Failed</span></td>
+            <td>32.4s</td>
+            <td>ELEMENT_NOT_FOUND</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td><strong>TC-REG-006</strong></td>
+            <td>Tampilkan success state setelah register</td>
+            <td>UI</td>
+            <td><span class="badge badge-passed">Passed</span></td>
+            <td>6.8s</td>
+            <td>-</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td><strong>TC-REG-007</strong></td>
+            <td>Full flow register lalu login</td>
+            <td>E2E</td>
+            <td><span class="badge badge-flaky">Flaky</span></td>
+            <td>38.3s</td>
+            <td>TIMEOUT_FAILURE</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td><strong>TC-REG-008</strong></td>
+            <td>Random email format validation</td>
+            <td>Property</td>
+            <td><span class="badge badge-passed">Passed</span></td>
+            <td>13.3s</td>
+            <td>-</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td><strong>TC-REG-009</strong></td>
+            <td>Boundary password length</td>
+            <td>Property</td>
+            <td><span class="badge badge-passed">Passed</span></td>
+            <td>7.2s</td>
+            <td>-</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td><strong>TC-REG-010</strong></td>
+            <td>SQL Injection pada email field</td>
+            <td>Security</td>
+            <td><span class="badge badge-passed">Passed</span></td>
+            <td>4.5s</td>
+            <td>-</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td><strong>TC-REG-011</strong></td>
+            <td>XSS pada field email</td>
+            <td>Security</td>
+            <td><span class="badge badge-failed">Failed</span></td>
+            <td>19.3s</td>
+            <td>ASSERTION_FAILURE</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td><strong>TC-REG-012</strong></td>
+            <td>Register endpoint response time under load</td>
+            <td>Performance</td>
+            <td><span class="badge badge-passed">Passed</span></td>
+            <td>21.7s</td>
+            <td>-</td>
+            <td>0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Failed Tests Detail -->
+    <div class="results-section">
+      <h2>❌ Failed Test Details</h2>
+
+      <div class="failure-card">
+        <h3>TC-REG-005: Form validation empty submit</h3>
+        <div class="meta-row">
+          <span>ELEMENT_NOT_FOUND</span>
+          <span>UI Test</span>
+          <span>Retry: 2</span>
+          <span>Duration: 32.4s</span>
+        </div>
+        <div class="error-msg">
+          Element [data-testid="email-error"] not found.<br>
+          Waiting for selector timeout 30000ms exceeded.
+        </div>
+        <div class="steps-list">
+          <div class="step-item"><span class="step-dot pass"></span> Step 1: Buka halaman /register (1.2s)</div>
+          <div class="step-item"><span class="step-dot pass"></span> Step 2: Klik button Register tanpa mengisi field (0.5s)</div>
+          <div class="step-item"><span class="step-dot fail"></span> Step 3: Validasi error message tampil (30.1s) — FAILED</div>
+        </div>
+        <p style="margin-top: 12px; font-size: 12px; color: #666;">
+          <strong>Evidence:</strong> 
+          <a href="evidence/TC-REG-005-trace.zip">Trace</a> | 
+          <a href="evidence/TC-REG-005.webm">Video</a> |
+          <a href="evidence/TC-REG-005-step-3.png">Screenshot</a>
+        </p>
+      </div>
+
+      <div class="failure-card">
+        <h3>TC-REG-011: XSS pada field email</h3>
+        <div class="meta-row">
+          <span>ASSERTION_FAILURE</span>
+          <span>Security Test</span>
+          <span>Retry: 2</span>
+          <span>Duration: 19.3s</span>
+        </div>
+        <div class="error-msg">
+          expect(received).not.toContain(expected)<br>
+          Expected response body to NOT contain "&lt;script&gt;" but it did.<br>
+          XSS vulnerability detected — response contains unescaped HTML.
+        </div>
+        <div class="steps-list">
+          <div class="step-item"><span class="step-dot pass"></span> Step 1: POST /api/register dengan XSS payload (1.7s)</div>
+          <div class="step-item"><span class="step-dot fail"></span> Step 2: Validasi response tidak mengandung unescaped HTML (1.4s) — FAILED</div>
+        </div>
+        <p style="margin-top: 12px; font-size: 12px; color: #666;">
+          <strong>Evidence:</strong> 
+          <a href="evidence/TC-REG-011-trace.zip">Trace</a> | 
+          <a href="evidence/TC-REG-011.webm">Video</a> |
+          <a href="evidence/TC-REG-011-step-2.png">Screenshot</a>
+        </p>
+        <p style="margin-top: 8px; font-size: 12px; color: #991b1b; font-weight: 600;">
+          ⚠️ SECURITY FINDING: Potential Stored XSS vulnerability. Backend does not sanitize input before echoing in response.
+        </p>
+      </div>
+    </div>
+
+    <!-- Flaky Tests -->
+    <div class="results-section">
+      <h2>⚠️ Flaky Tests</h2>
+
+      <div class="flaky-card">
+        <h3>TC-REG-007: Full flow register lalu login</h3>
+        <div class="meta-row">
+          <span>TIMEOUT_FAILURE (initial)</span>
+          <span>E2E Test</span>
+          <span>Passed on retry 1</span>
+        </div>
+        <p style="margin-top: 8px; font-size: 12px; color: #666;">
+          Initial run failed with timeout waiting for navigation to /dashboard. 
+          Passed on first retry. Likely caused by slow redirect or race condition between auth state and route guard.
+        </p>
+        <div class="steps-list">
+          <div class="step-item"><span class="step-dot pass"></span> Step 1-8: All steps passed on retry</div>
+          <div class="step-item"><span class="step-dot pass"></span> Step 9: Validasi redirect ke /dashboard (3.1s)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>Generated by QA Executor Agent v1.0.0 | Execution ID: EXEC-REG-20260519-001</p>
+      <p>Report generated at 2026-05-19T10:02:35.000Z</p>
+    </div>
+  </div>
+</body>
+</html>

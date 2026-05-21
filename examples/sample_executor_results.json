@@ -1,0 +1,553 @@
+{
+  "execution_id": "EXEC-REG-20260519-001",
+  "execution_date": "2026-05-19",
+  "started_at": "2026-05-19T10:00:00.000Z",
+  "finished_at": "2026-05-19T10:02:34.512Z",
+  "total_duration_ms": 154512,
+  "environment": "local",
+  "browser": "chromium",
+  "executor_version": "1.0.0",
+  "evidence_mode": "FULL",
+  "summary": {
+    "total": 12,
+    "passed": 9,
+    "failed": 2,
+    "blocked": 0,
+    "flaky": 1,
+    "invalid": 0
+  },
+  "results": [
+    {
+      "execution_id": "EXEC-REG-20260519-001",
+      "tc_id": "TC-REG-001",
+      "test_name": "Register valid user",
+      "test_type": "API Test",
+      "status": "PASSED",
+      "failure_category": null,
+      "retry_count": 0,
+      "flaky": false,
+      "started_at": "2026-05-19T10:00:00.000Z",
+      "finished_at": "2026-05-19T10:00:03.245Z",
+      "duration_ms": 3245,
+      "browser": "chromium",
+      "environment": "local",
+      "error": null,
+      "steps": [
+        {
+          "step_id": 1,
+          "step_name": "POST /api/register dengan data valid",
+          "status": "PASS",
+          "duration_ms": 2890,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-001-step-1.png"
+        }
+      ],
+      "evidence": {
+        "screenshots": ["evidence/TC-REG-001-step-1.png"],
+        "video": "evidence/TC-REG-001.webm",
+        "trace": "evidence/TC-REG-001-trace.zip"
+      }
+    },
+    {
+      "execution_id": "EXEC-REG-20260519-001",
+      "tc_id": "TC-REG-002",
+      "test_name": "Register tanpa email",
+      "test_type": "API Test",
+      "status": "PASSED",
+      "failure_category": null,
+      "retry_count": 0,
+      "flaky": false,
+      "started_at": "2026-05-19T10:00:03.300Z",
+      "finished_at": "2026-05-19T10:00:05.120Z",
+      "duration_ms": 1820,
+      "browser": "chromium",
+      "environment": "local",
+      "error": null,
+      "steps": [
+        {
+          "step_id": 1,
+          "step_name": "POST /api/register tanpa email",
+          "status": "PASS",
+          "duration_ms": 1650,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-002-step-1.png"
+        }
+      ],
+      "evidence": {
+        "screenshots": ["evidence/TC-REG-002-step-1.png"],
+        "video": "evidence/TC-REG-002.webm",
+        "trace": "evidence/TC-REG-002-trace.zip"
+      }
+    },
+    {
+      "execution_id": "EXEC-REG-20260519-001",
+      "tc_id": "TC-REG-003",
+      "test_name": "Register password kurang dari 8 karakter",
+      "test_type": "API Test",
+      "status": "PASSED",
+      "failure_category": null,
+      "retry_count": 0,
+      "flaky": false,
+      "started_at": "2026-05-19T10:00:05.200Z",
+      "finished_at": "2026-05-19T10:00:07.010Z",
+      "duration_ms": 1810,
+      "browser": "chromium",
+      "environment": "local",
+      "error": null,
+      "steps": [
+        {
+          "step_id": 1,
+          "step_name": "POST /api/register dengan password pendek",
+          "status": "PASS",
+          "duration_ms": 1600,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-003-step-1.png"
+        }
+      ],
+      "evidence": {
+        "screenshots": ["evidence/TC-REG-003-step-1.png"],
+        "video": "evidence/TC-REG-003.webm",
+        "trace": "evidence/TC-REG-003-trace.zip"
+      }
+    },
+    {
+      "execution_id": "EXEC-REG-20260519-001",
+      "tc_id": "TC-REG-004",
+      "test_name": "Register email duplikat",
+      "test_type": "API Test",
+      "status": "PASSED",
+      "failure_category": null,
+      "retry_count": 0,
+      "flaky": false,
+      "started_at": "2026-05-19T10:00:07.100Z",
+      "finished_at": "2026-05-19T10:00:10.450Z",
+      "duration_ms": 3350,
+      "browser": "chromium",
+      "environment": "local",
+      "error": null,
+      "steps": [
+        {
+          "step_id": 1,
+          "step_name": "Pre-Condition: Buat akun dengan email yang akan diduplikasi",
+          "status": "PASS",
+          "duration_ms": 1800,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-004-step-1.png"
+        },
+        {
+          "step_id": 2,
+          "step_name": "POST /api/register dengan email duplikat",
+          "status": "PASS",
+          "duration_ms": 1200,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-004-step-2.png"
+        }
+      ],
+      "evidence": {
+        "screenshots": ["evidence/TC-REG-004-step-1.png", "evidence/TC-REG-004-step-2.png"],
+        "video": "evidence/TC-REG-004.webm",
+        "trace": "evidence/TC-REG-004-trace.zip"
+      }
+    },
+    {
+      "execution_id": "EXEC-REG-20260519-001",
+      "tc_id": "TC-REG-005",
+      "test_name": "Form validation empty submit",
+      "test_type": "UI Test",
+      "status": "FAILED",
+      "failure_category": "ELEMENT_NOT_FOUND",
+      "retry_count": 2,
+      "flaky": false,
+      "started_at": "2026-05-19T10:00:10.500Z",
+      "finished_at": "2026-05-19T10:00:42.890Z",
+      "duration_ms": 32390,
+      "browser": "chromium",
+      "environment": "local",
+      "error": "locator.click: Error: Element [data-testid=\"email-error\"] not found. Waiting for selector timeout 30000ms",
+      "steps": [
+        {
+          "step_id": 1,
+          "step_name": "Buka halaman /register",
+          "status": "PASS",
+          "duration_ms": 1200,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-005-step-1.png"
+        },
+        {
+          "step_id": 2,
+          "step_name": "Klik button Register tanpa mengisi field",
+          "status": "PASS",
+          "duration_ms": 450,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-005-step-2.png"
+        },
+        {
+          "step_id": 3,
+          "step_name": "Validasi error message tampil",
+          "status": "FAIL",
+          "duration_ms": 30100,
+          "error_message": "Element [data-testid=\"email-error\"] not found. Timeout 30000ms exceeded.",
+          "screenshot_path": "evidence/TC-REG-005-step-3.png"
+        }
+      ],
+      "evidence": {
+        "screenshots": ["evidence/TC-REG-005-step-1.png", "evidence/TC-REG-005-step-2.png", "evidence/TC-REG-005-step-3.png"],
+        "video": "evidence/TC-REG-005.webm",
+        "trace": "evidence/TC-REG-005-trace.zip"
+      }
+    },
+    {
+      "execution_id": "EXEC-REG-20260519-001",
+      "tc_id": "TC-REG-006",
+      "test_name": "Tampilkan success state setelah register",
+      "test_type": "UI Test",
+      "status": "PASSED",
+      "failure_category": null,
+      "retry_count": 0,
+      "flaky": false,
+      "started_at": "2026-05-19T10:00:43.000Z",
+      "finished_at": "2026-05-19T10:00:49.780Z",
+      "duration_ms": 6780,
+      "browser": "chromium",
+      "environment": "local",
+      "error": null,
+      "steps": [
+        {
+          "step_id": 1,
+          "step_name": "Buka halaman /register",
+          "status": "PASS",
+          "duration_ms": 1100,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-006-step-1.png"
+        },
+        {
+          "step_id": 2,
+          "step_name": "Input email",
+          "status": "PASS",
+          "duration_ms": 320,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-006-step-2.png"
+        },
+        {
+          "step_id": 3,
+          "step_name": "Input password",
+          "status": "PASS",
+          "duration_ms": 280,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-006-step-3.png"
+        },
+        {
+          "step_id": 4,
+          "step_name": "Klik button Register",
+          "status": "PASS",
+          "duration_ms": 2100,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-006-step-4.png"
+        },
+        {
+          "step_id": 5,
+          "step_name": "Validasi success message tampil",
+          "status": "PASS",
+          "duration_ms": 1800,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-006-step-5.png"
+        }
+      ],
+      "evidence": {
+        "screenshots": ["evidence/TC-REG-006-step-1.png", "evidence/TC-REG-006-step-2.png", "evidence/TC-REG-006-step-3.png", "evidence/TC-REG-006-step-4.png", "evidence/TC-REG-006-step-5.png"],
+        "video": "evidence/TC-REG-006.webm",
+        "trace": "evidence/TC-REG-006-trace.zip"
+      }
+    },
+    {
+      "execution_id": "EXEC-REG-20260519-001",
+      "tc_id": "TC-REG-007",
+      "test_name": "Full flow register lalu login",
+      "test_type": "E2E Test",
+      "status": "FLAKY",
+      "failure_category": "TIMEOUT_FAILURE",
+      "retry_count": 1,
+      "flaky": true,
+      "started_at": "2026-05-19T10:00:50.000Z",
+      "finished_at": "2026-05-19T10:01:28.340Z",
+      "duration_ms": 38340,
+      "browser": "chromium",
+      "environment": "local",
+      "error": "Initial run: Timeout waiting for navigation to **/dashboard. Retry 1: PASSED.",
+      "steps": [
+        {
+          "step_id": 1,
+          "step_name": "Buka halaman /register",
+          "status": "PASS",
+          "duration_ms": 1050,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-007-step-1.png"
+        },
+        {
+          "step_id": 2,
+          "step_name": "Input email pada form register",
+          "status": "PASS",
+          "duration_ms": 300,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-007-step-2.png"
+        },
+        {
+          "step_id": 3,
+          "step_name": "Input password pada form register",
+          "status": "PASS",
+          "duration_ms": 280,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-007-step-3.png"
+        },
+        {
+          "step_id": 4,
+          "step_name": "Klik button Register",
+          "status": "PASS",
+          "duration_ms": 1900,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-007-step-4.png"
+        },
+        {
+          "step_id": 5,
+          "step_name": "Tunggu redirect ke /login",
+          "status": "PASS",
+          "duration_ms": 2200,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-007-step-5.png"
+        },
+        {
+          "step_id": 6,
+          "step_name": "Input email pada form login",
+          "status": "PASS",
+          "duration_ms": 310,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-007-step-6.png"
+        },
+        {
+          "step_id": 7,
+          "step_name": "Input password pada form login",
+          "status": "PASS",
+          "duration_ms": 290,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-007-step-7.png"
+        },
+        {
+          "step_id": 8,
+          "step_name": "Klik button Login",
+          "status": "PASS",
+          "duration_ms": 1800,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-007-step-8.png"
+        },
+        {
+          "step_id": 9,
+          "step_name": "Validasi redirect ke /dashboard dan welcome text",
+          "status": "PASS",
+          "duration_ms": 3100,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-007-step-9.png"
+        }
+      ],
+      "evidence": {
+        "screenshots": ["evidence/TC-REG-007-step-1.png", "evidence/TC-REG-007-step-2.png", "evidence/TC-REG-007-step-3.png", "evidence/TC-REG-007-step-4.png", "evidence/TC-REG-007-step-5.png", "evidence/TC-REG-007-step-6.png", "evidence/TC-REG-007-step-7.png", "evidence/TC-REG-007-step-8.png", "evidence/TC-REG-007-step-9.png"],
+        "video": "evidence/TC-REG-007.webm",
+        "trace": "evidence/TC-REG-007-trace.zip"
+      }
+    },
+    {
+      "execution_id": "EXEC-REG-20260519-001",
+      "tc_id": "TC-REG-008",
+      "test_name": "Random email format validation",
+      "test_type": "Property-Based Test",
+      "status": "PASSED",
+      "failure_category": null,
+      "retry_count": 0,
+      "flaky": false,
+      "started_at": "2026-05-19T10:01:28.400Z",
+      "finished_at": "2026-05-19T10:01:41.670Z",
+      "duration_ms": 13270,
+      "browser": "chromium",
+      "environment": "local",
+      "error": null,
+      "steps": [
+        {
+          "step_id": 1,
+          "step_name": "Generate random strings tanpa format email dan validasi rejection",
+          "status": "PASS",
+          "duration_ms": 12800,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-008-step-1.png"
+        }
+      ],
+      "evidence": {
+        "screenshots": ["evidence/TC-REG-008-step-1.png"],
+        "video": "evidence/TC-REG-008.webm",
+        "trace": "evidence/TC-REG-008-trace.zip"
+      }
+    },
+    {
+      "execution_id": "EXEC-REG-20260519-001",
+      "tc_id": "TC-REG-009",
+      "test_name": "Boundary password length",
+      "test_type": "Property-Based Test",
+      "status": "PASSED",
+      "failure_category": null,
+      "retry_count": 0,
+      "flaky": false,
+      "started_at": "2026-05-19T10:01:41.700Z",
+      "finished_at": "2026-05-19T10:01:48.920Z",
+      "duration_ms": 7220,
+      "browser": "chromium",
+      "environment": "local",
+      "error": null,
+      "steps": [
+        {
+          "step_id": 1,
+          "step_name": "POST /api/register dengan password 7 karakter (expect reject)",
+          "status": "PASS",
+          "duration_ms": 1900,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-009-step-1.png"
+        },
+        {
+          "step_id": 2,
+          "step_name": "POST /api/register dengan password 8 karakter (expect accept)",
+          "status": "PASS",
+          "duration_ms": 2400,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-009-step-2.png"
+        },
+        {
+          "step_id": 3,
+          "step_name": "POST /api/register dengan password 9 karakter (expect accept)",
+          "status": "PASS",
+          "duration_ms": 2300,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-009-step-3.png"
+        }
+      ],
+      "evidence": {
+        "screenshots": ["evidence/TC-REG-009-step-1.png", "evidence/TC-REG-009-step-2.png", "evidence/TC-REG-009-step-3.png"],
+        "video": "evidence/TC-REG-009.webm",
+        "trace": "evidence/TC-REG-009-trace.zip"
+      }
+    },
+    {
+      "execution_id": "EXEC-REG-20260519-001",
+      "tc_id": "TC-REG-010",
+      "test_name": "SQL Injection pada email field",
+      "test_type": "Security Test",
+      "status": "PASSED",
+      "failure_category": null,
+      "retry_count": 0,
+      "flaky": false,
+      "started_at": "2026-05-19T10:01:49.000Z",
+      "finished_at": "2026-05-19T10:01:53.450Z",
+      "duration_ms": 4450,
+      "browser": "chromium",
+      "environment": "local",
+      "error": null,
+      "steps": [
+        {
+          "step_id": 1,
+          "step_name": "POST /api/register dengan SQL injection payload",
+          "status": "PASS",
+          "duration_ms": 1800,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-010-step-1.png"
+        },
+        {
+          "step_id": 2,
+          "step_name": "Verifikasi database table users masih intact",
+          "status": "PASS",
+          "duration_ms": 2100,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-010-step-2.png"
+        }
+      ],
+      "evidence": {
+        "screenshots": ["evidence/TC-REG-010-step-1.png", "evidence/TC-REG-010-step-2.png"],
+        "video": "evidence/TC-REG-010.webm",
+        "trace": "evidence/TC-REG-010-trace.zip"
+      }
+    },
+    {
+      "execution_id": "EXEC-REG-20260519-001",
+      "tc_id": "TC-REG-011",
+      "test_name": "XSS pada field email",
+      "test_type": "Security Test",
+      "status": "FAILED",
+      "failure_category": "ASSERTION_FAILURE",
+      "retry_count": 2,
+      "flaky": false,
+      "started_at": "2026-05-19T10:01:53.500Z",
+      "finished_at": "2026-05-19T10:02:12.780Z",
+      "duration_ms": 19280,
+      "browser": "chromium",
+      "environment": "local",
+      "error": "expect(received).not.toContain(expected) — Expected response body to NOT contain \"<script>\" but it did. Response body contained unescaped HTML tag.",
+      "steps": [
+        {
+          "step_id": 1,
+          "step_name": "POST /api/register dengan XSS payload",
+          "status": "PASS",
+          "duration_ms": 1700,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-011-step-1.png"
+        },
+        {
+          "step_id": 2,
+          "step_name": "Validasi response tidak mengandung unescaped HTML",
+          "status": "FAIL",
+          "duration_ms": 1400,
+          "error_message": "expect(received).not.toContain(expected) — Response body contains raw <script> tag. XSS vulnerability detected.",
+          "screenshot_path": "evidence/TC-REG-011-step-2.png"
+        }
+      ],
+      "evidence": {
+        "screenshots": ["evidence/TC-REG-011-step-1.png", "evidence/TC-REG-011-step-2.png"],
+        "video": "evidence/TC-REG-011.webm",
+        "trace": "evidence/TC-REG-011-trace.zip"
+      }
+    },
+    {
+      "execution_id": "EXEC-REG-20260519-001",
+      "tc_id": "TC-REG-012",
+      "test_name": "Register endpoint response time under load",
+      "test_type": "Performance Test",
+      "status": "PASSED",
+      "failure_category": null,
+      "retry_count": 0,
+      "flaky": false,
+      "started_at": "2026-05-19T10:02:12.800Z",
+      "finished_at": "2026-05-19T10:02:34.512Z",
+      "duration_ms": 21712,
+      "browser": "chromium",
+      "environment": "local",
+      "error": null,
+      "steps": [
+        {
+          "step_id": 1,
+          "step_name": "Kirim 50 concurrent POST /api/register",
+          "status": "PASS",
+          "duration_ms": 18200,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-012-step-1.png"
+        },
+        {
+          "step_id": 2,
+          "step_name": "Validasi response time dan error rate",
+          "status": "PASS",
+          "duration_ms": 200,
+          "error_message": null,
+          "screenshot_path": "evidence/TC-REG-012-step-2.png"
+        }
+      ],
+      "evidence": {
+        "screenshots": ["evidence/TC-REG-012-step-1.png", "evidence/TC-REG-012-step-2.png"],
+        "video": "evidence/TC-REG-012.webm",
+        "trace": "evidence/TC-REG-012-trace.zip"
+      }
+    }
+  ]
+}
