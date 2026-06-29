@@ -193,7 +193,9 @@ Contoh:
 
 ### 1. General Rules
 - Gunakan Bahasa Indonesia untuk bug report
-- Report HARUS dalam format Markdown atau HTML self-contained
+- Report HARUS menggunakan GitHub-Flavored Markdown.
+- Semua section yang didefinisikan sebagai table HARUS menggunakan valid Markdown table.
+- Agent DILARANG mengganti Markdown table menjadi HTML table, bullet list, atau paragraph.
 - Hindari generic statement
 - Hindari copy raw logs secara penuh
 - Semua conclusion HARUS evidence-based
@@ -376,12 +378,123 @@ Before generating final report, agent MUST verify:
 
 ---
 
-## Output Format
+## Output Format (MANDATORY)
+
+Final report MUST menggunakan valid GitHub-Flavored Markdown.
+
+Agent DILARANG:
+
+* menghasilkan tab-separated text;
+* mengubah tabel menjadi bullet list atau paragraph;
+* membuat subsection terpisah untuk setiap bug;
+* membungkus tabel di dalam code block;
+* menghilangkan header atau separator table.
+
+### Markdown Table Rules
+
+Agent MUST:
+
+* menggunakan karakter `|` sebagai pemisah setiap cell;
+* menyertakan separator row tepat setelah header;
+* menulis satu bug dalam satu row;
+* menggunakan `<br>` untuk line break di dalam cell;
+* menggunakan `\|` jika isi cell mengandung karakter pipe;
+* memastikan jumlah cell setiap row sama dengan jumlah header;
+* tidak menambahkan blank line di antara header, separator, dan data row;
+* mengisi field yang tidak tersedia dengan `N/A`;
+* memvalidasi format table sebelum menyimpan final report.
+
+---
+
 ### 1. Bug Summary Table
-| Bug ID | Title | Severity | Priority | Status | Confidence |
+
+Agent MUST menghasilkan tabel berikut:
+
+| Bug ID  | Title            | Severity | Priority | Status | Confidence |
+| ------- | ---------------- | -------- | -------- | ------ | ---------- |
+| BUG-001 | Contoh judul bug | High     | P2       | Open   | High       |
+
+Rules:
+
+* Satu unique bug ditulis dalam satu row.
+* Bug carried over harus mempertahankan Bug ID sebelumnya.
+* Excluded issue tidak boleh masuk ke tabel ini.
+* Jika tidak terdapat valid bug, tetap tampilkan tabel dengan satu row `N/A`.
+
+---
 
 ### 2. Detailed Bug Report Table
-| Bug ID | Module | Requirement ID | Related TC IDs | Severity | Priority | Status | Confidence Level | Description | Steps to Reproduce | Expected Result | Actual Result | Possible Root Cause | Affected Areas | Fix Recommendation | Impact Analysis | Confidence Note |
+
+Section MUST terdiri dari:
+
+1. Context paragraph.
+2. Satu Markdown table berisi seluruh valid bug.
+3. Satu bug dalam satu row.
+
+Required format:
+
+**Context:** Jelaskan bug yang carried over dari run sebelumnya, bug baru pada current run, dan excluded issue yang ditemukan. Jangan mengarang informasi yang tidak tersedia.
+
+| Bug ID  | Module         | Requirement ID | Related TC IDs | Severity | Priority | Status | Confidence Level | Description                                    | Steps to Reproduce                                                        | Expected Result                                 | Actual Result                                                       | Possible Root Cause                                                       | Affected Areas      | Fix Recommendation                                              | Impact Analysis                                                   | Confidence Note                                     |
+| ------- | -------------- | -------------- | -------------- | -------- | -------- | ------ | ---------------- | ---------------------------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------- | --------------------------------------------------- |
+| BUG-001 | Authentication | N/A            | TC-AUTH-001    | High     | P2       | Open   | High             | User gagal login menggunakan credential valid. | 1. Buka halaman login.<br>2. Masukkan credential valid.<br>3. Klik Login. | User berhasil login dan diarahkan ke dashboard. | Sistem menampilkan HTTP 500 dan user tetap berada di halaman login. | Possible error pada authentication service berdasarkan response HTTP 500. | Login dan dashboard | Periksa authentication service, validation, dan error handling. | User tidak dapat mengakses aplikasi sehingga core flow terblokir. | High — reproducible dengan evidence yang konsisten. |
+
+#### Detailed Bug Report Rules
+
+Agent MUST:
+
+* menampilkan seluruh valid bug dalam satu table;
+* menulis satu bug dalam satu row;
+* mempertahankan Bug ID untuk carried-over bug;
+* memberikan Bug ID baru secara sequential untuk bug baru;
+* menggunakan `N/A` jika Requirement ID tidak tersedia;
+* memisahkan multiple TC IDs menggunakan koma;
+* menggunakan `<br>` untuk setiap step pada `Steps to Reproduce`;
+* tidak menggunakan multiline Markdown biasa di dalam cell;
+* tidak memasukkan excluded issue ke tabel utama;
+* memastikan setiap row memiliki tepat 17 cell.
+
+#### Context Format
+
+Gunakan format seperti berikut:
+
+**Context:** BUG-004 dan BUG-005 carried over dari run sebelumnya `QA/Release/v2.1.1/analysis/qa-analysis-report.md` pada run 2026-06-26. BUG-006 baru ditemukan pada current run 2026-06-29. BUG-007 diklasifikasikan sebagai excluded issue karena test script outdated.
+
+Jika tidak terdapat previous bug atau excluded issue, hanya tampilkan informasi yang tersedia.
+
+#### Duplicate Bug Rules
+
+Failures boleh tetap menjadi bug terpisah walaupun memiliki kategori root cause yang sama apabila:
+
+* endpoint berbeda;
+* module berbeda;
+* trigger berbeda;
+* affected area berbeda;
+* reproduction steps berbeda;
+* membutuhkan perbaikan pada lokasi yang berbeda.
+
+Failures hanya digabung jika berasal dari defect instance yang sama, pada endpoint atau component yang sama, dengan trigger, behavior, dan fix location yang sama.
+
+---
+
+### Final Table Validation Gate
+
+Before saving the final report, Agent MUST verify:
+
+* semua table memiliki header;
+* semua table memiliki separator row;
+* setiap data row memiliki jumlah cell yang sama dengan header;
+* Detailed Bug Report Table memiliki tepat 17 kolom;
+* tidak ada blank line di tengah table;
+* Steps to Reproduce menggunakan `<br>`;
+* karakter pipe di dalam content telah di-escape;
+* carried-over bug mempertahankan Bug ID sebelumnya;
+* excluded issue tidak masuk ke bug table utama;
+* output bukan tab-separated text;
+* output dapat dirender sebagai Markdown table.
+
+Jika salah satu validation gagal, Agent MUST memperbaiki format sebelum menyimpan report.
+
 
 ---
 
